@@ -9,12 +9,21 @@
 </template>
 
 <script>
+import Store from'./store'
 export default {
   data(){
     return{
       msg:"this is my todolist",
-      tiems:[],
+      tiems: Store.fetch(),
       newitem:''
+    }
+  },
+  watch:{
+    tiems:{
+      handler:function(tiems){
+        Store.save(tiems);
+      },
+      deep:true
     }
   },
   methods:{ 
@@ -35,5 +44,6 @@ export default {
 <style scoped>
 .finished{
   text-decoration: underline;
+  color: red;
 }
 </style>
